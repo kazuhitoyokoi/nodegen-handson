@@ -1,0 +1,23 @@
+swagger: '2.0'
+info:
+  description: The International Space Station location
+  version: 4.5.1
+  title: ISS Location
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+host: api.open-notify.org
+basePath: /
+schemes:
+  - http
+paths:
+  /iss-now.json:
+    get:
+      summary: Current ISS location over Earth (latitude/longitude)
+      description: This is a simple API to return the current location of the ISS.
+      operationId: ISSLocationNow
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation

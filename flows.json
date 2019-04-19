@@ -1,0 +1,212 @@
+[
+    {
+        "id": "68149c9d.6be054",
+        "type": "tab",
+        "label": "handson1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "3850d108.c419de",
+        "type": "tab",
+        "label": "handson2",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "7dd4a3fe.38798c",
+        "type": "iss-location",
+        "z": "68149c9d.6be054",
+        "method": "ISSLocationNow",
+        "name": "",
+        "x": 270,
+        "y": 160,
+        "wires": [
+            [
+                "3335a867.0a3bb",
+                "64815c5f.4c9e2c"
+            ]
+        ]
+    },
+    {
+        "id": "93e0819f.71905",
+        "type": "inject",
+        "z": "68149c9d.6be054",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 80,
+        "wires": [
+            [
+                "7dd4a3fe.38798c"
+            ]
+        ]
+    },
+    {
+        "id": "3335a867.0a3bb",
+        "type": "debug",
+        "z": "68149c9d.6be054",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 460,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "64815c5f.4c9e2c",
+        "type": "change",
+        "z": "68149c9d.6be054",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.lat",
+                "pt": "msg",
+                "to": "payload.iss_position.latitude",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.lon",
+                "pt": "msg",
+                "to": "payload.iss_position.longitude",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.name",
+                "pt": "msg",
+                "to": "payload.timestamp",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 200,
+        "y": 260,
+        "wires": [
+            [
+                "473bfee3.2d0fc8"
+            ]
+        ]
+    },
+    {
+        "id": "473bfee3.2d0fc8",
+        "type": "worldmap",
+        "z": "68149c9d.6be054",
+        "name": "",
+        "lat": "",
+        "lon": "",
+        "zoom": "",
+        "layer": "",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "show",
+        "layers": "show",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "false",
+        "coords": "false",
+        "path": "/worldmap",
+        "x": 380,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "6bef6ffa.68bb38",
+        "type": "fileinject",
+        "z": "3850d108.c419de",
+        "name": "",
+        "x": 120,
+        "y": 120,
+        "wires": [
+            [
+                "1146a4c7.83926b"
+            ]
+        ]
+    },
+    {
+        "id": "1146a4c7.83926b",
+        "type": "function",
+        "z": "3850d108.c419de",
+        "name": "image segmenter",
+        "func": "var imageSegmenter = global.get('imageSegmenter');\nimageSegmenter.predict(msg.payload).then(function (response) {\n    msg.payload = response.objectsDetected;\n    node.send(msg);\n});",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 310,
+        "y": 120,
+        "wires": [
+            [
+                "e44cc463.66103"
+            ]
+        ]
+    },
+    {
+        "id": "e44cc463.66103",
+        "type": "debug",
+        "z": "3850d108.c419de",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 510,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "3ed810a5.582fa8",
+        "type": "image-segmenter",
+        "z": "3850d108.c419de",
+        "name": "",
+        "x": 310,
+        "y": 220,
+        "wires": [
+            [
+                "8bed15e9.7e79b"
+            ]
+        ]
+    },
+    {
+        "id": "6cf6c773.99c3e",
+        "type": "fileinject",
+        "z": "3850d108.c419de",
+        "name": "",
+        "x": 120,
+        "y": 220,
+        "wires": [
+            [
+                "3ed810a5.582fa8"
+            ]
+        ]
+    },
+    {
+        "id": "8bed15e9.7e79b",
+        "type": "debug",
+        "z": "3850d108.c419de",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 510,
+        "y": 220,
+        "wires": []
+    }
+]
