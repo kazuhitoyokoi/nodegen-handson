@@ -1,5 +1,5 @@
 # Contents of Node generator hands-on
-- [Instruction slides](nodegen-handson.pdf)
+- [Hands-on slides](nodegen-handson.pdf)
 - Hands-on 1: Creating an original node from Open API document
   - [Open API document](swagger.yaml)
   - [Generated files](https://github.com/kazuhitoyokoi/node-red-contrib-iss-location)
